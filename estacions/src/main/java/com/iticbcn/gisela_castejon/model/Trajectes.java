@@ -28,6 +28,8 @@ public class Trajectes {
     @Column
     private Date horari;
 
+    //Relacions
+
     public Trajectes(int preu, String nom, Date date, String origen, String desti, Date horari) {
         this.preu = preu;
         this.nom = nom;
