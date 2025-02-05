@@ -3,14 +3,17 @@ package com.iticbcn.gisela_castejon.model;
 import java.io.Serializable;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="Maquinista")
 public class Maquinista implements Serializable{
     @Column(name = "nom")
     private String nom;
 
     @Id
-    @Column(name="ID_empleat")
     private int ID_empleat;
 
     @Column(name="num_Seguretat_Social")

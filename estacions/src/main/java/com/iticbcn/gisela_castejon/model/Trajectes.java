@@ -2,12 +2,30 @@ package com.iticbcn.gisela_castejon.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="Trajectes")
 public class Trajectes {
+    @Id 
     private int preu;
+    
+    @Column
     private String nom;
+    
+    @Column
     private Date date;
+    
+    @Column
     private String origen;
+    
+    @Column
     private String desti;
+    
+    @Column
     private Date horari;
 
     public Trajectes(int preu, String nom, Date date, String origen, String desti, Date horari) {
