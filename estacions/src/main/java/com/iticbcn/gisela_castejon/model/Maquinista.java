@@ -1,6 +1,8 @@
 package com.iticbcn.gisela_castejon.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +12,7 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,6 +45,16 @@ public class Maquinista implements Serializable{
         this.salari = salari;
         this.nom_companyia = nom_companyia;
         this.companyia = companyia;
+    }
+
+    @OneToMany(mappedBy="maquinista", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    private Set<Tren> trens = new HashSet<Tren>();
+
+    public void addTrens(Tren tren){
+        if(!this.trens.contains(tren)){
+            trens.add(tren);
+            tren.setMaquinista(this);
+        }
     }
 
     public Maquinista(String nom, int iD_empleat, String num_Seguretat_Social, float salari, String nom_companyia) {

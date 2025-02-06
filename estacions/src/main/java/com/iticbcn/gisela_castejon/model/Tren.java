@@ -61,6 +61,18 @@ public class Tren {
         }
     }
 
+    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name="ID_empleat", foreignKey=@ForeignKey(name="FK_MAQ_TREN"))
+    private Maquinista maquinista;
+
+    public Tren(int serial_num, int capacitat, String marca, String model, Maquinista maquinista) {
+        this.serial_num = serial_num;
+        this.capacitat = capacitat;
+        this.marca = marca;
+        this.model = model;
+        this.maquinista = maquinista;
+    }
+
     public Tren(){}
 
     public int getCapacitat() {return capacitat;}
@@ -68,7 +80,11 @@ public class Tren {
     public String getModel() {return model;}
     public int getSerial_num() {return serial_num;}
     public Companyia getCompanyia() {return companyia;}
+    public Maquinista getMaquinista() {return maquinista;}
 
+    public void setMaquinista(Maquinista maquinista) {
+        this.maquinista = maquinista;
+    }
     public void setCapacitat(int capacitat) {
         this.capacitat = capacitat;
     }
