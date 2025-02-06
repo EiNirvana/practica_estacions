@@ -2,9 +2,14 @@ package com.iticbcn.gisela_castejon.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,10 +29,24 @@ public class Maquinista implements Serializable{
 
     @Column(name="nom_companyia")
     private String nom_companyia;
- 
+
+    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name="ID_empleat", foreignKey=@ForeignKey(name="FK_COMP_MAQ"))
+    private Companyia companyia;
+
+    public Maquinista(String nom, int iD_empleat, String num_Seguretat_Social, float salari, String nom_companyia,
+            Companyia companyia) {
+        this.nom = nom;
+        this.ID_empleat = iD_empleat;
+        this.num_Seguretat_Social = num_Seguretat_Social;
+        this.salari = salari;
+        this.nom_companyia = nom_companyia;
+        this.companyia = companyia;
+    }
+
     public Maquinista(String nom, int iD_empleat, String num_Seguretat_Social, float salari, String nom_companyia) {
         this.nom = nom;
-        ID_empleat = iD_empleat;
+        this.ID_empleat = iD_empleat;
         this.num_Seguretat_Social = num_Seguretat_Social;
         this.salari = salari;
         this.nom_companyia = nom_companyia;
@@ -40,7 +59,11 @@ public class Maquinista implements Serializable{
     public String getNum_Seguretat_Social() {return num_Seguretat_Social;}
     public float getSalari() {return salari;}
     public String getNom_companyia() {return nom_companyia;}
-    
+    public Companyia getCompanyia() {return companyia;}
+
+    public void setCompanyia(Companyia companyia) {
+        this.companyia = companyia;
+    }
     public void setNom(String nom) {
         this.nom = nom;
     }

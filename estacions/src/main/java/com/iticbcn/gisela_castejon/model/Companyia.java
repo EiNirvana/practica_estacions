@@ -32,7 +32,15 @@ public class Companyia implements Serializable{
             trens.add(tren);
             tren.setCompanyia(this);
         }
+    }
 
+    private Set<Maquinista> maquinistes = new HashSet<>();
+    
+    public void addMaquinista(Maquinista maquinista){
+        if(!this.maquinistes.contains(maquinista)){
+            maquinistes.add(maquinista);
+            maquinista.setCompanyia(this);
+        }
     }
 
     public Companyia(String nom, String telefon, String adreça) {

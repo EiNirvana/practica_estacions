@@ -1,5 +1,8 @@
 package com.iticbcn.gisela_castejon.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,12 +51,23 @@ public class Tren {
         this.serial_num = serial_num;
     }
 
+    @OneToMany(mappedBy="tren", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    private Set<Trajectes> trajectes = new HashSet<Trajectes>();
+
+    public void addTrajectes(Trajectes trajecte){
+        if(!this.trajectes.contains(trajecte)){
+            trajectes.add(trajecte);
+            trajecte.setTren(this);
+        }
+    }
+
     public Tren(){}
 
     public int getCapacitat() {return capacitat;}
     public String getMarca() {return marca;}
     public String getModel() {return model;}
     public int getSerial_num() {return serial_num;}
+    public Companyia getCompanyia() {return companyia;}
 
     public void setCapacitat(int capacitat) {
         this.capacitat = capacitat;
@@ -66,11 +81,6 @@ public class Tren {
     public void setSerial_num(int serial_num) {
         this.serial_num = serial_num;
     }
-
-    public Companyia getCompanyia() {
-        return companyia;
-    }
-
     public void setCompanyia(Companyia companyia) {
         this.companyia = companyia;
     }
